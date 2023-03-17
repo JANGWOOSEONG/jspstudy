@@ -41,7 +41,7 @@
 		</form>
 	</div>
 	
-	<!-- location.href를 이용해서 파라미터 보내기 -->
+	<!-- location.href 또는 open() 이용해서 파라미터 보내기 -->
 	<div>
 		<button id="btn">파라미터전송</button>
 	</div>
@@ -51,44 +51,43 @@
 			open('/01_Servlet/GetServlet?model=tv&price=100');
 		})
 	</script>
-	
+
 	<!-- 배열을 파라미터로 보내기 -->
 	<div>
 		<form action="/01_Servlet/ArrayServlet">
-		<div>
-			<input type="text" name="tel" size="4" maxlength="3">
-			-
-			<input type="text" name="tel" size="4" maxlength="4">
-			-
-			<input type="text" name="tel" size="4" maxlength="4">
-		</div>
-		<div>
-			<input type="checkbox" name="hobbies" value="travel" id="travel">
-			<label for="travel">여행</label>
-			<input type="checkbox" name="hobbies" value="swim" id="swim">
-			<label for="swim">수영</label>
-			<input type="checkbox" name="hobbies" value="golf" id="golf">
-			<label for="golf">골프</label>
-		</div>
+			<div>
+				<input type="text" name="tel" size="4" maxlength="3">
+				-
+				<input type="text" name="tel" size="4" maxlength="4">
+				-
+				<input type="text" name="tel" size="4" maxlength="4">			
+			</div>
+			<div>
+				<input type="checkbox" name="hobbies" value="travel" id="travel">
+				<label for="travel">여행</label>
+				<input type="checkbox" name="hobbies" value="swim" id="swim">
+				<label for="swim">수영</label>
+				<input type="checkbox" name="hobbies" value="golf" id="golf">
+				<label for="golf">골프</label>
+			</div>
 			<button>배열전송</button>
 		</form>
 	</div>
-	
-	<!-- 
-		POST 방식으로 요청
+
+	<!--
+		POST 방식 요청
 		1. <form> 태그를 이용한 submit
 		2. $.ajax({})을 이용한 비동기 처리 요청
-	 -->
+	-->
 	<div>
 		<form method="POST" action="/01_Servlet/PostServlet">
 			<label for="model">모델명</label>
 			<input type="text" id="model" name="model">
 			<label for="price">가격</label>
 			<input type="text" id="price" name="price">
-			<input type="submit" value="파라미터 전송">
+			<input type="submit" value="파라미터전송">
 		</form>
 	</div>
-	
 	
 	
 </body>

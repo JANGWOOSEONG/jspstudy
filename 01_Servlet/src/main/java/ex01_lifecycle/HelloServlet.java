@@ -49,7 +49,7 @@ public class HelloServlet extends HttpServlet {
 	/*
 	  2. init()
 	  	  1) 서블릿 환경 설정을 담당한다.
-	  	  2) init() 호출 뒤 자동으로 servicec()메소드가 호출된다.
+	  	  2) init() 호출 뒤 자동으로 service()메소드가 호출된다.
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		System.out.println("init() 호출");

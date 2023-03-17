@@ -1,8 +1,6 @@
-package ex03_parameter;
+package ex05_redirect;
 
 import java.io.IOException;
-import java.util.Arrays;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,25 +8,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/ArrayServlet")
-
-public class ArrayServlet extends HttpServlet {
+@WebServlet("/RedirectServlet1")
+public class RedirectServlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		// 요청 인코딩
-		request.setCharacterEncoding("UTF-8");
 		
-		// 요청 파라미터(배열)
-		String[] tel = request.getParameterValues("tel");
-		String[] hobbies = request.getParameterValues("hobbies");
+		// 리다이렉트 이전(첫 번째 요청)의 파라미터 확인
+		String model = request.getParameter("model");
+		System.out.println("RedirectServlet1 : " + model);
 		
-		response.getWriter().append("tel: ").append(tel[0] + "-" + tel[1] + "-" + tel[2]).append(", hobbies: " + Arrays.toString(hobbies));
+		// redirect를 이용해서 다른 서블릿(다른 서버 경로)으로 이동하기
+		response.sendRedirect("/01_Servlet/RedirectServlet2");// 리다이렉트서블릿2번으로 다시 이동하시오.
 		
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		doGet(request, response);
 	}
 
