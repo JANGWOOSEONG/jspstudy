@@ -1,6 +1,7 @@
 package ex07_ajax;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +25,7 @@ public class JSONServlet extends HttpServlet {
        
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		try {
 		// 요청 인코딩
 		request.setCharacterEncoding("UTF-8");
 		
@@ -35,16 +36,47 @@ public class JSONServlet extends HttpServlet {
 		if(strAge != null && strAge.isEmpty() == false) {
 			age = Integer.parseInt(strAge);
 		}
+		// 이름 예외 처리
+		if(name.length() < 2 || name.length() > 6) {
+			throw new NameHandleException(name + "은(는) 잘못된 이름입니다",601);
+		}
+		// 나이 예외 처리
+		if(age < 0 || age > 100) {
+			throw new AgeHandleException(age + "살은 잘못된 나이입니다",600);
+		}
+		
 		
 		// 응답할 JSON 데이터
 		JSONObject obj = new JSONObject();
 		obj.put("name", name);
 		obj.put("age", age);
 		
-		System.out.println(obj.toString());
-	}
-
+		//System.out.println(obj.toString()); //{"name":"ㅇㅇㅇ","age":ㅇㅇ}
+		
+		//응답 데이터 타입
+		response.setContentType("application/json; charset=UTF-8");
 	
+		// 출력 스트림 생성
+		PrintWriter out = response.getWriter();
+		
+		// 출력
+		String resData = obj.toString();
+		out.println(resData); // 텍스트 형식으로 된 JSON 데이터를 응답한다.
+		out.flush();
+		out.close();
+		
+	}catch(MyHandleException e) {
+		
+		response.setContentType("text/plain; charset=UTF-8");
+		
+		response.setStatus(e.getErrorCode());
+		
+		response.getWriter().println(e.getMessage());
+		
+	}
+		
+	}
+		
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		doGet(request, response);
